@@ -1,0 +1,8 @@
+adafruit-circuitpython-ssd1305
+adafruit-circuitpython-busdevice
+spidev
+gpiozero
+numpy==1.26.4
+pillow
+lgpio
+ipget

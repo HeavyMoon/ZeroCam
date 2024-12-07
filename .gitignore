@@ -1,0 +1,6 @@
+__pycache__/
+venv/
+photo/*.jpg
+photo/*.dng
+video/*.h264
+picam2.service
