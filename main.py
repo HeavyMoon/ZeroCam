@@ -8,8 +8,9 @@ import ipget
 from PIL import Image, ImageDraw, ImageFont
 import os
 
-from photo import photo
-from video import video
+from photo   import photo
+from video   import video
+from preview import preview_latest
 
 def ps_api(cmd: str) -> str:
     """Communicates with a local API to fetch system information."""
@@ -19,15 +20,6 @@ def ps_api(cmd: str) -> str:
         sock.send(cmd.encode('utf-8'))
         response = sock.recv(1024).decode('utf-8')
     return re.sub(r'.*: (.+)\n', r'\1', response)
-
-
-def get_battery_icon(battery: float) -> str:
-    """Returns the battery icon based on charge level."""
-    levels = [10, 20, 30, 40, 50, 60, 70, 80, 90]
-    for idx, level in enumerate(levels):
-        if battery < level:
-            return str(idx)
-    return '9'
 
 
 def handle_button_press(buttons: dict, key_states: dict, menu_state: dict):
@@ -48,6 +40,7 @@ def update_menu_state(menu_state: dict):
         elif menu_state["MENU_POS_MAX"] < menu_state["MENU_POS"]:
             menu_state["MENU_POS"] = menu_state["MENU_POS_MIN"]
 
+
 def key1_action(menu_state: dict):
     """KEY1 button pressed function"""
     if menu_state["MENU_ID"] == 1:
@@ -66,6 +59,7 @@ def key1_action(menu_state: dict):
         if 'wlan0' in addr.list:
             ps_api('rtc_web')
 
+
 def key2_action(menu_state: dict):
     """KEY2 button pressed function"""
     if menu_state["MENU_ID"] == 3:
@@ -75,10 +69,12 @@ def key2_action(menu_state: dict):
             disp.ShowImage(disp.getbuffer(image))
             os.system(f'{os.path.dirname(__file__)}/upload-data.sh')
 
+
 def key3_action(menu_state: dict):
     """KEY3 button pressed function"""
     if menu_state["MENU_ID"] == 3:
-        print('menu:3 key:2')
+       preview_latest(disp, 0) 
+
 
 # Initialize OLED Display
 disp = SH1106.SH1106()
@@ -89,7 +85,6 @@ disp.clear()
 image     = Image.new('1', (disp.width, disp.height), 'WHITE')
 draw      = ImageDraw.Draw(image)
 font      = ImageFont.truetype('Consolas.ttf', 10)
-#icon_font = ImageFont.truetype('icon.ttf', 13)
 
 # Initialize menu and display settings
 menu_state = {
@@ -163,9 +158,9 @@ try:
                 draw.text((61, 37), "5", font=font)
 
             elif menu_state["MENU_ID"] == 3:
-                draw.text((0, 20), " SYNC TIME WEB", font=font)
-                draw.text((0, 30), " UPLOAD DATA", font=font)
-                draw.text((0, 40), " -----", font=font)
+                draw.text((0, 20), " SYNC TIME WEB ", font=font)
+                draw.text((0, 30), " UPLOAD DATA   ", font=font)
+                draw.text((0, 40), " PREVIEW LATEST", font=font)
 
             elif menu_state["MENU_ID"] == 4:
                 addr = ipget.ipget()

@@ -1,4 +1,6 @@
 # ZeroCam
+Raspberry Pi Zero 2 W Camera
+
 ## 13890 128x64 1.3inch OLED DISPLAY HAT
 I couldn't change the interface from SPI to i2c...
 
@@ -6,7 +8,7 @@ I couldn't change the interface from SPI to i2c...
 Note: Picamera2 does not support rotating images in 90 degree increments.
 
 ## PiSugar2
-### REST API SAMPLE
+### TCP API SAMPLE
 ```python
 import socket
 
@@ -21,7 +23,7 @@ def ps_api(cmd: str) -> str:
 ps_api('get battery')
 ```
 
-Note: Pressing the PiSugar physical button will cause the REST API to return a bug that add prefix 'single'.
+Note: Pressing the PiSugar physical button will cause the API to return a bug message that add prefix 'single'.
 
 ## systemd
 ```
