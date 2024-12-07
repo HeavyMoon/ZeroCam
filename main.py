@@ -89,8 +89,8 @@ font      = ImageFont.truetype('Consolas.ttf', 10)
 # Initialize menu and display settings
 menu_state = {
     "DISPLAY_UPDATE": True,
-    "MENU_ID": 0,
-    "MENU_POS": 0,
+    "MENU_ID":      0,
+    "MENU_POS":     0,
     "MENU_POS_MIN": 0,
     "MENU_POS_MAX": 3,
 }
@@ -117,7 +117,7 @@ try:
         handle_button_press(buttons, disp.RPI, menu_state)
 
         # Update display every second or when a button is pressed
-        if time.time() - prev_time >= 1.0 or menu_state["DISPLAY_UPDATE"]:
+        if time.time() - prev_time >= 10.0 or menu_state["DISPLAY_UPDATE"]:
             prev_time = time.time()
             menu_state["DISPLAY_UPDATE"] = False
 
@@ -129,12 +129,8 @@ try:
             draw.text((0, 0), ctime, font=font)
 
             # Header: Battery Level
-            #battery = float(ps_api('get battery'))
-            #b_icon = get_battery_icon(battery)
-            #draw.text((110, 0), b_icon, font=icon_font)
             blevel = str(round(float(ps_api('get battery'))))
             draw.text((110, 0), blevel, font=font)
-
 
             # Menu
             if menu_state["MENU_ID"] == 0:
