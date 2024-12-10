@@ -81,8 +81,8 @@ def preview_latest(disp: SH1106, th: int):
     font  = ImageFont.truetype('Consolas.ttf', 10)
 
     buttons = {
-        disp.RPI.GPIO_KEY_UP_PIN:    lambda opt: opt.update(th=min(opt['th'] + 15, 255)),
-        disp.RPI.GPIO_KEY_DOWN_PIN:  lambda opt: opt.update(th=max(opt['th'] - 15, 0)),
+        disp.RPI.GPIO_KEY_UP_PIN:    lambda opt: opt.update(th=min(opt['th'] + 10, 255)),
+        disp.RPI.GPIO_KEY_DOWN_PIN:  lambda opt: opt.update(th=max(opt['th'] - 10, 0)),
         disp.RPI.GPIO_KEY_LEFT_PIN:  lambda opt: opt.update(loop=False),
     }
     

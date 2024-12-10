@@ -46,7 +46,7 @@ WantedBy=multi-user.target
 ## REFERENCES
 - [PiSugar](https://www.pisugar.com/)
 - [PiSugar - GitHub](https://github.com/PiSugar/PiSugar)
-- [PiSugar - GitHub - REST API](https://github.com/PiSugar/pisugar-power-manager-rs#unix-domain-socket--webscoket--tcp)
+- [PiSugar - GitHub - TPC API](https://github.com/PiSugar/pisugar-power-manager-rs#unix-domain-socket--webscoket--tcp)
 - [13890 128x64, 1.3inch OLED display HAT for Raspberry Pi](https://www.waveshare.com/1.3inch-oled-hat.htm)
 - [1.3inch OLED HAT](https://www.waveshare.com/wiki/1.3inch_OLED_HAT)
 - [PiCamera2 Manual](https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf)

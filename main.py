@@ -56,24 +56,29 @@ def key1_action(menu_state: dict):
         video(5)
 
     if menu_state["MENU_ID"] == 3:
-        if 'wlan0' in addr.list:
-            ps_api('rtc_web')
+       preview_latest(disp, 0) 
 
 
 def key2_action(menu_state: dict):
     """KEY2 button pressed function"""
+    if menu_state["MENU_ID"] == 3:
+        draw.rectangle((0, 0, disp.width, disp.height), fill=1)
+        draw.text((0, 30), "SYNC TIME...", font=font)
+        disp.ShowImage(disp.getbuffer(image))
+
+        if 'wlan0' in addr.list:
+            ps_api('rtc_web')
+        ps_api('rtc_rtc2pi')
+
+
+def key3_action(menu_state: dict):
+    """KEY3 button pressed function"""
     if menu_state["MENU_ID"] == 3:
         if 'wlan0' in addr.list:
             draw.rectangle((0, 0, disp.width, disp.height), fill=1)
             draw.text((0, 30), "UPLOADING...", font=font)
             disp.ShowImage(disp.getbuffer(image))
             os.system(f'{os.path.dirname(__file__)}/upload-data.sh')
-
-
-def key3_action(menu_state: dict):
-    """KEY3 button pressed function"""
-    if menu_state["MENU_ID"] == 3:
-       preview_latest(disp, 0) 
 
 
 # Initialize OLED Display
@@ -154,9 +159,9 @@ try:
                 draw.text((61, 37), "5", font=font)
 
             elif menu_state["MENU_ID"] == 3:
-                draw.text((0, 20), " SYNC TIME WEB ", font=font)
-                draw.text((0, 30), " UPLOAD DATA   ", font=font)
-                draw.text((0, 40), " PREVIEW LATEST", font=font)
+                draw.text((0, 20), " PREVIEW LATEST", font=font)
+                draw.text((0, 30), " SYNC TIME     ", font=font)
+                draw.text((0, 40), " UPLOAD DATA   ", font=font)
 
             elif menu_state["MENU_ID"] == 4:
                 addr = ipget.ipget()
