@@ -104,6 +104,10 @@ host = socket.gethostname()
 addr = ipget.ipget()
 prev_time = time.time()
 
+if 'wlan0' in addr.list:
+    ps_api('rtc_web')
+ps_api('rtc_rtc2pi')
+
 # Button actions
 buttons = {
     disp.RPI.GPIO_KEY_UP_PIN:    lambda state: state.update(MENU_POS=state["MENU_POS"] - 1),
